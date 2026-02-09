@@ -1,7 +1,6 @@
 import axios, { type InternalAxiosRequestConfig, type AxiosResponse } from "axios";
 import qs from "qs";
 import { ApiCodeEnum } from "@/enums/api";
-import { useUserStoreHook } from "@/store/modules/user";
 import { AuthStorage, redirectToLogin } from "@/utils/auth";
 
 // ============================================
@@ -59,7 +58,7 @@ http.interceptors.response.use(
   },
 
   async (error) => {
-    const { config, response } = error;
+    const { response } = error;
 
     if (!response) {
       ElMessage.error("网络连接失败");
@@ -68,12 +67,8 @@ http.interceptors.response.use(
 
     const { code, msg } = response.data as ApiResponse;
 
-    // Token 过期处理
-    if (code === ApiCodeEnum.ACCESS_TOKEN_INVALID) {
-      return retryWithRefresh(config);
-    }
-
-    if (code === ApiCodeEnum.REFRESH_TOKEN_INVALID) {
+    // Token 过期处理 —— 直接跳转登录页
+    if (code === ApiCodeEnum.ACCESS_TOKEN_INVALID || code === ApiCodeEnum.REFRESH_TOKEN_INVALID) {
       await redirectToLogin("登录已过期，请重新登录");
       return Promise.reject(new Error(msg || "Token Invalid"));
     }
@@ -84,38 +79,3 @@ http.interceptors.response.use(
 );
 
 export default http;
-
-// ============================================
-// Token 刷新重试
-// ============================================
-
-type Pending = { resolve: (v: unknown) => void; reject: (e: Error) => void };
-
-let refreshing = false;
-const queue: Pending[] = [];
-
-async function retryWithRefresh(config: InternalAxiosRequestConfig): Promise<unknown> {
-  return new Promise((resolve, reject) => {
-    queue.push({ resolve, reject });
-
-    if (refreshing) return;
-    refreshing = true;
-
-    useUserStoreHook()
-      .refreshToken()
-      .then(() => {
-        const token = AuthStorage.getAccessToken();
-        if (token) config.headers.Authorization = `Bearer ${token}`;
-
-        queue.forEach(({ resolve }) => http(config).then(resolve).catch(reject));
-      })
-      .catch(async () => {
-        queue.forEach(({ reject }) => reject(new Error("Token refresh failed")));
-        await redirectToLogin("登录已过期，请重新登录");
-      })
-      .finally(() => {
-        queue.length = 0;
-        refreshing = false;
-      });
-  });
-}

@@ -36,8 +36,7 @@ export const PLATFORM_TENANT_ID = 0;
 export const STORAGE_KEYS = {
   // ===== 认证相关 =====
   ACCESS_TOKEN: `${APP_PREFIX}:auth:access_token`,
-  REFRESH_TOKEN: `${APP_PREFIX}:auth:refresh_token`,
-  REMEMBER_ME: `${APP_PREFIX}:auth:remember_me`,
+  USER_INFO: `${APP_PREFIX}:auth:user_info`,
 
   // ===== 租户相关 =====
   TENANT_ID: `${APP_PREFIX}:tenant:id`,

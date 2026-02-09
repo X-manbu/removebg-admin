@@ -65,9 +65,7 @@
           </div>
         </div>
 
-        <transition name="fade-slide" mode="out-in">
-          <component :is="formComponents[component]" v-model="component" class="auth-panel__form" />
-        </transition>
+        <Login class="auth-panel__form" />
 
         <footer class="auth-panel__footer">
           <el-text size="small">
@@ -84,19 +82,10 @@
 import logo from "@/assets/images/logo.png";
 import { appConfig } from "@/settings";
 import ThemeSwitch from "@/components/ThemeSwitch/index.vue";
-
-type LayoutMap = "login" | "register" | "resetPwd";
+import Login from "./components/Login.vue";
 
 const { t } = useI18n();
-const component = ref<LayoutMap>("login");
-
 const tenantEnabled = appConfig.tenantEnabled;
-
-const formComponents = {
-  login: defineAsyncComponent(() => import("./components/Login.vue")),
-  register: defineAsyncComponent(() => import("./components/Register.vue")),
-  resetPwd: defineAsyncComponent(() => import("./components/ResetPwd.vue")),
-};
 </script>
 
 <style lang="scss" scoped>
