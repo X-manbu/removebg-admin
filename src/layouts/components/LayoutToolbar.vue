@@ -22,11 +22,6 @@
         <LangSelect />
       </div>
 
-      <!-- 通知 -->
-      <div class="navbar-actions__item">
-        <NoticeDropdown />
-      </div>
-
       <!-- 租户选择（如果启用多租户）-->
       <div v-if="showTenantSwitcher" class="navbar-actions__item">
         <TenantSwitcher @change="handleTenantChange" />
@@ -78,7 +73,6 @@ import CommandPalette from "@/components/CommandPalette/index.vue";
 import Fullscreen from "@/components/Fullscreen/index.vue";
 import SizeSelect from "@/components/SizeSelect/index.vue";
 import LangSelect from "@/components/LangSelect/index.vue";
-import NoticeDropdown from "@/components/NoticeDropdown/index.vue";
 import TenantSwitcher from "@/components/TenantSwitcher/index.vue";
 import { useTenantStoreHook } from "@/store/modules/tenant";
 
