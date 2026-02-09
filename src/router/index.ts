@@ -74,6 +74,40 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
 ];
 
+// 抠图管理
+constantRoutes.push({
+  path: "/removebg",
+  component: Layout,
+  redirect: "/removebg/config",
+  meta: { title: "抠图管理", icon: "setting" },
+  children: [
+    {
+      path: "config",
+      component: () => import("@/views/removebg/config/index.vue"),
+      name: "RemovebgConfig",
+      meta: { title: "系统配置" },
+    },
+    {
+      path: "redemption-codes",
+      component: () => import("@/views/removebg/redemption-codes/index.vue"),
+      name: "RedemptionCodes",
+      meta: { title: "兑换码管理" },
+    },
+    {
+      path: "logs/point-changes",
+      component: () => import("@/views/removebg/logs/point-changes.vue"),
+      name: "PointChangeLogs",
+      meta: { title: "点数变更日志" },
+    },
+    {
+      path: "logs/redemptions",
+      component: () => import("@/views/removebg/logs/redemptions.vue"),
+      name: "RedemptionLogs",
+      meta: { title: "兑换记录" },
+    },
+  ],
+});
+
 /**
  * 创建路由
  */

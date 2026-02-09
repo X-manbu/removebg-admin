@@ -22,3 +22,4 @@ export * from "./tenant-plan";
 export * from "./ai";
 export * from "./file";
 export * from "./codegen";
+export * from "./removebg";
