@@ -68,6 +68,7 @@
         <el-table-column label="ID" prop="id" width="70" align="center" />
         <el-table-column label="兑换码" prop="code" min-width="180" />
         <el-table-column label="批次号" prop="batch_no" min-width="140" />
+        <el-table-column label="用户编号" prop="uid" min-width="140" />
         <el-table-column label="赠送点数" prop="points" width="100" align="center" />
         <el-table-column label="过期时间" prop="expires_at" width="180" align="center">
           <template #default="{ row }">
