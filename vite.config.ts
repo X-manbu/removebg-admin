@@ -25,6 +25,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const isProduction = mode === "production";
 
   return {
+    base: '/admin/',
     resolve: {
       alias: {
         "@": pathSrc,
