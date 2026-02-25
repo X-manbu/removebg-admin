@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 
 export const Layout = () => import("@/layouts/index.vue");
 
@@ -110,7 +110,7 @@ constantRoutes.push({
  * 创建路由
  */
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: constantRoutes,
   // 刷新时，滚动条位置还原
   scrollBehavior: () => ({ left: 0, top: 0 }),
