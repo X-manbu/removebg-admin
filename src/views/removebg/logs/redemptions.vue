@@ -22,6 +22,15 @@
           />
         </el-form-item>
 
+        <el-form-item label="UID" prop="uid">
+          <el-input
+            v-model="queryParams.uid"
+            placeholder="请输入UID"
+            clearable
+            @keyup.enter="handleQuery"
+          />
+        </el-form-item>
+
         <el-form-item class="search-buttons">
           <el-button type="primary" icon="search" @click="handleQuery">搜索</el-button>
           <el-button icon="refresh" @click="handleResetQuery">重置</el-button>
@@ -41,6 +50,7 @@
         <el-table-column label="ID" prop="id" width="70" align="center" />
         <el-table-column label="兑换码" prop="code" min-width="180" />
         <el-table-column label="批次号" prop="batch_no" min-width="140" />
+        <el-table-column label="UID" prop="uid" width="120" align="center" />
         <el-table-column label="用户" min-width="160">
           <template #default="{ row }">
             <div style="display: flex; align-items: center; gap: 8px">
@@ -89,6 +99,7 @@ const pageSize = ref(10);
 const queryParams = reactive<RedemptionLogQueryParams>({
   codeId: undefined,
   userId: undefined,
+  uid: undefined,
 });
 
 async function fetchData() {

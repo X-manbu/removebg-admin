@@ -72,6 +72,8 @@ export interface RedemptionCodeQueryParams {
   status?: string;
   /** 兑换码模糊搜索 */
   code?: string;
+  /** 用户UID */
+  uid?: string;
   /** 每页条数 */
   limit?: number;
   /** 偏移量 */
@@ -144,6 +146,8 @@ export interface RedemptionLogItem {
   code_id: number;
   /** 用户ID */
   user_id: number;
+  /** 用户UID */
+  uid: string;
   /** 获得点数 */
   points: number;
   /** IP地址 */
@@ -168,6 +172,8 @@ export interface RedemptionLogQueryParams {
   codeId?: number;
   /** 用户ID */
   userId?: number;
+  /** 用户UID */
+  uid?: string;
   /** 每页条数 */
   limit?: number;
   /** 偏移量 */

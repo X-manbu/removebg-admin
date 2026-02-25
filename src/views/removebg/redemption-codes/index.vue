@@ -29,6 +29,15 @@
           />
         </el-form-item>
 
+        <el-form-item label="UID" prop="uid">
+          <el-input
+            v-model="queryParams.uid"
+            placeholder="请输入UID"
+            clearable
+            @keyup.enter="handleQuery"
+          />
+        </el-form-item>
+
         <el-form-item class="search-buttons">
           <el-button type="primary" icon="search" @click="handleQuery">搜索</el-button>
           <el-button icon="refresh" @click="handleResetQuery">重置</el-button>
@@ -202,6 +211,7 @@ const queryParams = reactive<RedemptionCodeQueryParams>({
   batchNo: undefined,
   status: undefined,
   code: undefined,
+  uid: undefined,
 });
 
 // 生成弹窗
