@@ -100,7 +100,7 @@ async function fetchData() {
       offset: (currentPage.value - 1) * pageSize.value,
     };
     const res = await RemovebgAdminAPI.getRedemptionLogs(params);
-    tableData.value = res.items;
+    tableData.value = res.logs;
     total.value = res.total;
   } catch (error) {
     console.error("获取兑换记录失败:", error);

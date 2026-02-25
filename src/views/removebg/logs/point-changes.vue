@@ -14,12 +14,7 @@
         </el-form-item>
 
         <el-form-item label="变动原因" prop="reason">
-          <el-select
-            v-model="queryParams.reason"
-            placeholder="全部"
-            clearable
-            style="width: 150px"
-          >
+          <el-select v-model="queryParams.reason" placeholder="全部" clearable style="width: 150px">
             <el-option label="初始赠送" value="initial" />
             <el-option label="抠图消耗" value="matting" />
             <el-option label="兑换码兑换" value="redemption" />
@@ -86,13 +81,13 @@
     </el-card>
 
     <!-- 调整用户点数弹窗 -->
-    <el-dialog v-model="adjustDialog.visible" title="调整用户点数" width="500px" @close="handleCloseAdjustDialog">
-      <el-form
-        ref="adjustFormRef"
-        :model="adjustForm"
-        :rules="adjustRules"
-        label-width="100px"
-      >
+    <el-dialog
+      v-model="adjustDialog.visible"
+      title="调整用户点数"
+      width="500px"
+      @close="handleCloseAdjustDialog"
+    >
+      <el-form ref="adjustFormRef" :model="adjustForm" :rules="adjustRules" label-width="100px">
         <el-form-item label="用户ID" prop="userId">
           <el-input-number
             v-model="adjustForm.userId"
@@ -197,7 +192,8 @@ async function fetchData() {
       offset: (currentPage.value - 1) * pageSize.value,
     };
     const res = await RemovebgAdminAPI.getPointChangeLogs(params);
-    tableData.value = res.items;
+    console.log("获取点数变更日志成功:", res);
+    tableData.value = res.logs;
     total.value = res.total;
   } catch (error) {
     console.error("获取点数变更日志失败:", error);

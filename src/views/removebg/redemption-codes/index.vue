@@ -14,12 +14,7 @@
         </el-form-item>
 
         <el-form-item label="状态" prop="status">
-          <el-select
-            v-model="queryParams.status"
-            placeholder="全部"
-            clearable
-            style="width: 120px"
-          >
+          <el-select v-model="queryParams.status" placeholder="全部" clearable style="width: 120px">
             <el-option label="有效" value="active" />
             <el-option label="已禁用" value="disabled" />
           </el-select>
@@ -92,7 +87,12 @@
     </el-card>
 
     <!-- 生成兑换码弹窗 -->
-    <el-dialog v-model="generateDialog.visible" title="生成兑换码" width="500px" @close="handleCloseGenerateDialog">
+    <el-dialog
+      v-model="generateDialog.visible"
+      title="生成兑换码"
+      width="500px"
+      @close="handleCloseGenerateDialog"
+    >
       <el-form
         ref="generateFormRef"
         :model="generateForm"
@@ -100,11 +100,21 @@
         label-width="120px"
       >
         <el-form-item label="生成数量" prop="count">
-          <el-input-number v-model="generateForm.count" :min="1" :max="1000" controls-position="right" />
+          <el-input-number
+            v-model="generateForm.count"
+            :min="1"
+            :max="1000"
+            controls-position="right"
+          />
         </el-form-item>
 
         <el-form-item label="赠送点数" prop="points">
-          <el-input-number v-model="generateForm.points" :min="1" :max="99999" controls-position="right" />
+          <el-input-number
+            v-model="generateForm.points"
+            :min="1"
+            :max="99999"
+            controls-position="right"
+          />
         </el-form-item>
 
         <el-form-item label="批次号" prop="batchNo">
@@ -122,7 +132,12 @@
         </el-form-item>
 
         <el-form-item label="最大使用次数" prop="maxUses">
-          <el-input-number v-model="generateForm.maxUses" :min="1" :max="99999" controls-position="right" />
+          <el-input-number
+            v-model="generateForm.maxUses"
+            :min="1"
+            :max="99999"
+            controls-position="right"
+          />
         </el-form-item>
       </el-form>
 
@@ -138,7 +153,9 @@
     <el-dialog v-model="resultDialog.visible" title="生成结果" width="600px">
       <el-descriptions :column="2" border>
         <el-descriptions-item label="批次号">{{ resultDialog.batchNo }}</el-descriptions-item>
-        <el-descriptions-item label="生成数量">{{ resultDialog.codes.length }}</el-descriptions-item>
+        <el-descriptions-item label="生成数量">
+          {{ resultDialog.codes.length }}
+        </el-descriptions-item>
       </el-descriptions>
 
       <el-input
@@ -223,7 +240,7 @@ async function fetchData() {
       offset: (currentPage.value - 1) * pageSize.value,
     };
     const res = await RemovebgAdminAPI.getRedemptionCodes(params);
-    tableData.value = res.items;
+    tableData.value = res.codes;
     total.value = res.total;
   } catch (error) {
     console.error("获取兑换码列表失败:", error);
@@ -295,7 +312,17 @@ function handleExportCodes() {
 }
 
 function handleExportTable() {
-  const header = ["ID", "兑换码", "批次号", "赠送点数", "过期时间", "最大使用次数", "已使用次数", "状态", "创建时间"];
+  const header = [
+    "ID",
+    "兑换码",
+    "批次号",
+    "赠送点数",
+    "过期时间",
+    "最大使用次数",
+    "已使用次数",
+    "状态",
+    "创建时间",
+  ];
   const rows = tableData.value.map((item) => [
     item.id,
     item.code,
