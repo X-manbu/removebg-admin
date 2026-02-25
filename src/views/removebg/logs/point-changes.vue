@@ -13,6 +13,15 @@
           />
         </el-form-item>
 
+        <el-form-item label="UID" prop="uid">
+          <el-input
+            v-model="queryParams.uid"
+            placeholder="请输入UID"
+            clearable
+            @keyup.enter="handleQuery"
+          />
+        </el-form-item>
+
         <el-form-item label="变动原因" prop="reason">
           <el-select v-model="queryParams.reason" placeholder="全部" clearable style="width: 150px">
             <el-option label="初始赠送" value="initial" />
@@ -48,6 +57,7 @@
       >
         <el-table-column label="ID" prop="id" width="70" align="center" />
         <el-table-column label="用户ID" prop="user_id" width="90" align="center" />
+        <el-table-column label="UID" prop="uid" width="120" align="center" />
         <el-table-column label="变动数量" prop="amount" width="110" align="center">
           <template #default="{ row }">
             <span :style="{ color: row.amount >= 0 ? '#67c23a' : '#f56c6c' }">
@@ -142,6 +152,7 @@ const pageSize = ref(10);
 
 const queryParams = reactive<PointChangeLogQueryParams>({
   userId: undefined,
+  uid: undefined,
   reason: undefined,
 });
 

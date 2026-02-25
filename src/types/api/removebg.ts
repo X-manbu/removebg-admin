@@ -100,6 +100,8 @@ export interface PointChangeLogItem {
   id: number;
   /** 用户ID */
   user_id: number;
+  /** 用户UID */
+  uid: string;
   /** 变动数量 */
   amount: number;
   /** 变动后余额 */
@@ -116,6 +118,8 @@ export interface PointChangeLogItem {
 export interface PointChangeLogQueryParams {
   /** 用户ID */
   userId?: number;
+  /** 用户UID */
+  uid?: string;
   /** 变动原因 */
   reason?: string;
   /** 每页条数 */
